@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proje Detayı - Kadir Fatih Köse</title>
+    <style>
+        :root {
+            --turkuaz: #00ADB5;
+            --koyu-arkaplan: #222831;
+            --header-arkaplan: #1A222C;
+            --acik-gri: #EEEEEE;
+            --gri-metin: #393E46;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--gri-metin);
+            background-color: #FFFFFF;
+            line-height: 1.7;
+        }
+
+        /* HEADER DÜZENLEMESİ */
+        header {
+            background-color: var(--turkuaz);
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        header a {
+            display: block;
+            padding: 20px 0;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        header a:hover { 
+            background-color: var(--koyu-arkaplan);
+            color: var(--turkuaz); 
+        }
+
+        .hero-alani {
+            background-color: var(--koyu-arkaplan);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--turkuaz);
+        }
+
+        .hero-alani h1 {
+            font-size: 2.2rem;
+            margin: 0 0 20px 0;
+            color: white;
+            line-height: 1.4;
+        }
+
+        .meta-bilgiler {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            font-size: 1.1rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .meta-oge { display: flex; align-items: center; gap: 8px; }
+        .meta-oge svg { width: 20px; height: 20px; fill: var(--turkuaz); }
+
+        .icerik-alani {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .kisa-aciklama {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--koyu-arkaplan);
+            border-left: 5px solid var(--turkuaz);
+            padding-left: 20px;
+            margin-bottom: 40px;
+            background-color: #fcfcfc;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .icerik-bolumu { margin-bottom: 50px; }
+
+        .icerik-bolumu h2 {
+            color: var(--koyu-arkaplan);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--turkuaz);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .detay-metin { font-size: 1.1rem; text-align: justify; }
+
+        .faydalar { list-style: none; padding: 0; margin: 0; }
+        .faydalar li {
+            position: relative; padding-left: 30px; margin-bottom: 15px; font-size: 1.1rem;
+        }
+        .faydalar li::before {
+            content: "✔"; position: absolute; left: 0; color: var(--turkuaz); font-weight: bold; font-size: 1.2rem;
+        }
+
+        .teknolojiler { display: flex; flex-wrap: wrap; gap: 12px; }
+        
+        .tech-etiket {
+            background-color: var(--acik-gri); color: var(--koyu-arkaplan);
+            padding: 10px 20px; border-radius: 30px; font-weight: 600;
+            font-size: 1rem; transition: all 0.3s ease;
+        }
+        .tech-etiket:hover { background-color: var(--turkuaz); color: white; }
+
+        .galeri {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .galeri img {
+            width: 200px;
+            height: 260px;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .galeri img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .lightbox {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center; align-items: center;
+        }
+        .lightbox-icerik { max-width: 90%; max-height: 90%; border-radius: 8px; border: 2px solid var(--turkuaz); }
+        .kapat-btn {
+            position: absolute; top: 20px; right: 40px; color: white;
+            font-size: 50px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .kapat-btn:hover { color: var(--turkuaz); }
+
+        .kaynaklar {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+            margin-top: 60px; padding: 40px 0; border-top: 1px solid var(--acik-gri);
+        }
+        
+        .link-btn {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 15px 35px; background-color: var(--turkuaz); color: white;
+            text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: all 0.3s;
+        }
+        
+        .link-btn.koyu { background-color: var(--koyu-arkaplan); }
+        .link-btn:hover { opacity: 0.9; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+        .btn-icon { width: 22px; height: 22px; fill: white; }
+
+        .yukari-cik-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--turkuaz);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease-in-out;
+            z-index: 1500;
+        }
+
+        .yukari-cik-btn.goster { opacity: 1; visibility: visible; transform: translateY(0); }
+        .yukari-cik-btn:hover { background-color: var(--koyu-arkaplan); transform: translateY(-5px); }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            
+            #anasayfa { padding-top: 250px; }
+            .hero-alani { padding-top: 150px; }
+
+            .hero-isim, .hero-alani h1 { font-size: 1.8rem; }
+            .hero-unvan { font-size: 1.2rem; }
+            h2 { font-size: 2rem; }
+
+            .card {
+                width: 100%;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .galeri { flex-direction: column; align-items: center; }
+            .galeri img { width: 100%; max-width: 350px; height: auto; }
+
+            .iletisim-bilgi {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body id="sayfa-basi">
+
+    <header>
+        <a href="index.html#calismalar">← Portfolyoya Dön</a>
+    </header>
+
+    <div class="hero-alani">
+        <h1>YAPAY ZEKAYA BAKIŞ AÇILARI VE ÇALIŞAN PERFORMANSI:<br>KAMU VE ÖZEL SEKTÖRDE BİR İNCELEME</h1>
+        
+        <div class="meta-bilgiler">
+            <div class="meta-oge">
+                <svg viewBox="0 0 448 512"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v320c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h352v256c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
+                <span>Mayıs 2025</span>
+            </div>
+            <div class="meta-oge">
+                <svg viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
+                <span>Lisans Bitirme Çalışması / Sakarya Üniversitesi</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="icerik-alani">
+        
+        <div class="icerik-bolumu">
+            <p class="kisa-aciklama">
+                Yapay zekâ teknolojilerine yönelik toplumsal ve kurumsal perspektiflerin çalışan performansı üzerindeki etkilerini inceleyen, kamu ve özel sektör bağlamında ampirik verilere dayalı karşılaştırmalı bir lisans bitirme çalışmasıdır.
+            </p>
+        </div>
+
+        <div class="icerik-bolumu">
+            <h2>Proje Detayı</h2>
+            <p class="detay-metin">
+                Bu çalışmada, yapay zekânın iş gücü dinamiklerine etkisi; çalışanların verimliliği, motivasyon düzeyi ve görev tanımlarındaki değişim ekseninde değerlendirilmiştir. Araştırma kapsamında, Türkiye genelinde kamu ve özel sektörde aktif olarak görev yapan 84 katılımcıdan anket yoluyla birincil veri toplanmıştır. Elde edilen ampirik veriler, SPSS 22.0 programı kullanılarak geçerlilik, güvenilirlik, faktör analizi ve normallik testlerine tabi tutulmuştur. Verilerin normal dağılım göstermemesi nedeniyle hipotezlerin test edilmesinde parametrik olmayan analiz tekniklerinden Mann-Whitney U ve Kruskal-Wallis H testleri tercih edilerek derinlemesine istatistiksel analizler gerçekleştirilmiştir.
+            </p>
+        </div>
+
+        <div class="icerik-bolumu">
+            <h2>Elde Edilen Kazanımlar</h2>
+            <ul class="faydalar">
+                <li>Yapay Zekâ Algısı ve Çalışan Performansı ölçeklerinde sırasıyla <strong>0,882 ve 0,775 Cronbach's Alpha</strong> değerleri elde edilerek yüksek akademik güvenilirlik sağlandı.</li>
+                <li>Kaiser-Meyer-Olkin (KMO) testlerinde <strong>,885 ve ,739</strong> değerlerine ulaşılarak örneklem hacminin faktör analizine mükemmel derecede uygun olduğu kanıtlandı.</li>
+                <li>Faktör analizleri sonucunda Yapay Zekâ Algısı ölçeğinin iki boyutlu yapıda toplam varyansın <strong>%65,342'sini</strong> açıkladığı ampirik olarak ortaya kondu[cite: 3].</li>
+                <li>Yapılan parametrik olmayan hipotez testlerinde (Mann-Whitney U); yapay zekâ algısının <strong>cinsiyet değişkenine göre erkek katılımcılar lehine anlamlı bir farklılık (p = 0,016)</strong> gösterdiği tespit edildi[cite: 3].</li>
+            </ul>
+        </div>
+
+        <div class="icerik-bolumu">
+            <h2>Hipotez ve Sonuç</h2>
+            <p class="detay-metin">
+                Araştırmanın temel odağı olan <strong>"Hipotez 1: Çalışanların yapay zekâ algıları ile çalışma performansları arasında pozitif ve anlamlı bir ilişki vardır"</strong> tezi, yapılan Spearman's korelasyon analizleri sonucunda istatistiksel olarak <strong>desteklenmemiştir</strong>. 
+            </p>
+            <p class="detay-metin" style="margin-top: 10px;">
+                <strong>Ana Çıktı:</strong> Elde edilen ampirik bulgular, çalışanların yapay zekâya yönelik olumlu ya da olumsuz tutumlarının doğrudan bir performans artışı veya azalışı ile ilişkili olmadığını; yapay zekânın iş yerlerindeki performans modellerinde henüz doğrudan belirleyici bir faktör olarak öne çıkmadığını göstermektedir.
+            </p>
+        </div>
+
+        <div class="icerik-bolumu">
+            <h2>Kullanılan Teknolojiler</h2>
+            <div class="teknolojiler">
+                <span class="tech-etiket">SPSS 22.0</span>
+                <span class="tech-etiket">Veri Analizi &amp; Hipotez Testleri</span>
+                <span class="tech-etiket">Güvenilirlik Analizi (Cronbach's Alpha)</span>
+                <span class="tech-etiket">Faktör Analizi (KMO &amp; Bartlett's)</span>
+                <span class="tech-etiket">Normallik Testleri (Shapiro-Wilk)</span>
+                <span class="tech-etiket">Google Formlar</span>
+            </div>
+        </div>
+
+        <div class="icerik-bolumu">
+            <h2>Görseller</h2>
+            <div class="galeri">
+                <img src="gorsel/tez1.jpg" onclick="acLightbox(this.src)">
+                <img src="gorsel/tez2.jpg" onclick="acLightbox(this.src)">
+            </div>
+        </div>
+
+        <div class="kaynaklar">
+            <a href="dosya/bitirme_calismasi.pdf" download class="link-btn">
+                <svg class="btn-icon" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 232V334.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31V232c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg>
+                Tez Raporunu İndir
+            </a>
+        </div>
+
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="kapatLightbox(event)">
+        <span class="kapat-btn" onclick="kapatLightbox(event)">&times;</span>
+        <img id="lightbox-img" class="lightbox-icerik" src="">
+    </div>
+
+    <a href="#sayfa-basi" class="yukari-cik-btn" id="yukariBtn">↑</a>
+
+    <script>
+        function acLightbox(resimKaynagi) {
+            document.getElementById("lightbox").style.display = "flex";
+            document.getElementById("lightbox-img").src = resimKaynagi;
+        }
+
+        function kapatLightbox(event) {
+            if (event.target.id === "lightbox" || event.target.className === "kapat-btn") {
+                document.getElementById("lightbox").style.display = "none";
+            }
+        }
+
+        window.addEventListener("scroll", function() {
+            var yukariBtn = document.getElementById("yukariBtn");
+            if (window.scrollY > 300) {
+                yukariBtn.classList.add("goster");
+            } else {
+                yukariBtn.classList.remove("goster");
+            }
+        });
+    </script>
+
+</body>
+</html>
