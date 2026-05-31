@@ -25,16 +25,17 @@
             color: var(--koyu-metin);
             background-color: var(--acik-arkaplan);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- ÜST MENÜ (SABİT) --- */
+        /* --- ÜST MENÜ (SABİT DEĞİL, KAYDIRINCA YOK OLUR) --- */
         header {
             background-color: var(--header-arkaplan);
-            position: fixed; /* Sayfa kaysa bile hep üstte durur */
+            position: absolute; /* Fixed yerine Absolute yapıldı */
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 2000; /* Her şeyin üstünde görünmesi için yüksek değer */
+            z-index: 2000; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             min-height: 65px;
             display: flex;
@@ -57,9 +58,9 @@
             position: absolute;
             right: 20px;
             top: 50%;
-            transform: translateY(-50%); /* Dikeyde kusursuz ortalama */
+            transform: translateY(-50%); 
             z-index: 2001;
-            padding: 10px; /* Tıklama alanını genişletmek için */
+            padding: 10px; 
         }
 
         nav ul {
@@ -78,6 +79,7 @@
             font-weight: 600;
             font-size: 1.1rem;
             transition: color 0.3s ease;
+            display: block;
         }
 
         nav a:hover { color: #FFC107; }
@@ -331,29 +333,30 @@
         .yukari-cik-btn.goster { opacity: 1; visibility: visible; transform: translateY(0); }
 
         @media (max-width: 768px) {
-            /* --- MOBİL MENÜ DÜZENLEMESİ BAŞLANGICI --- */
             .menu-toggle {
-                display: block; /* Mobilde ikonu göster */
+                display: block; 
             }
 
+            /* TAM EKRAN (FULL WIDTH/HEIGHT) MOBİL MENÜ */
             nav ul {
-                display: none; /* Başlangıçta menüyü gizle */
+                display: none; 
                 flex-direction: column;
-                gap: 1rem;
-                padding: 1.5rem 0;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                padding-top: 2rem;
                 position: absolute;
-                top: 45px; /* Navbarın hemen altından açılır */
+                top: 65px; /* Navbar bitiminden başlar */
                 left: 0;
-                width: 100%;
+                width: 100vw; /* Ekranın tamamını kaplar */
+                height: calc(100vh - 65px); /* Ekranın alt sonuna kadar iner */
                 background-color: var(--header-arkaplan);
                 box-shadow: 0 5px 10px rgba(0,0,0,0.2);
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             nav ul.active {
-                display: flex; /* Butona basılınca görünür olur */
+                display: flex; 
             }
-            /* --- MOBİL MENÜ DÜZENLEMESİ BİTİŞİ --- */
 
             #anasayfa { padding-top: 250px; }
             .hero-alani { padding-top: 150px; }
