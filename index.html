@@ -27,27 +27,39 @@
             line-height: 1.6;
         }
 
+        /* --- ÜST MENÜ (SABİT) --- */
         header {
             background-color: var(--header-arkaplan);
-            position: absolute; 
+            position: fixed; /* Sayfa kaysa bile hep üstte durur */
             top: 0;
+            left: 0;
             width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 2000; /* Her şeyin üstünde görünmesi için yüksek değer */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            min-height: 65px;
+            display: flex;
+            align-items: center;
         }
 
-        /* --- MOBİL MENÜ BUTONU (Masaüstünde Gizli) --- */
+        nav {
+            width: 100%;
+            position: relative;
+        }
+
+        /* --- MOBİL MENÜ BUTONU --- */
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            font-size: 28px;
+            font-size: 26px;
             color: white;
             cursor: pointer;
             position: absolute;
             right: 20px;
-            top: 15px;
-            z-index: 1001;
+            top: 50%;
+            transform: translateY(-50%); /* Dikeyde kusursuz ortalama */
+            z-index: 2001;
+            padding: 10px; /* Tıklama alanını genişletmek için */
         }
 
         nav ul {
@@ -56,7 +68,7 @@
             justify-content: center;
             gap: 2rem;
             margin: 0;
-            padding: 1.2rem 0;
+            padding: 0;
             transition: all 0.3s ease;
         }
 
@@ -237,7 +249,7 @@
         }
 
         .lightbox {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
             width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85);
             justify-content: center; align-items: center;
         }
@@ -321,20 +333,21 @@
         @media (max-width: 768px) {
             /* --- MOBİL MENÜ DÜZENLEMESİ BAŞLANGICI --- */
             .menu-toggle {
-                display: block;
+                display: block; /* Mobilde ikonu göster */
             }
 
             nav ul {
-                display: none; /* Başlangıçta gizli */
+                display: none; /* Başlangıçta menüyü gizle */
                 flex-direction: column;
                 gap: 1rem;
                 padding: 1.5rem 0;
                 position: absolute;
-                top: 55px; /* Navbarın hemen altından açılır */
+                top: 45px; /* Navbarın hemen altından açılır */
                 left: 0;
                 width: 100%;
                 background-color: var(--header-arkaplan);
                 box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             nav ul.active {
@@ -367,7 +380,9 @@
 
     <header id="ust-kisim">
         <nav>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul id="navLinks">
                 <li><a href="#anasayfa">Anasayfa</a></li>
                 <li><a href="#hakkimda">Hakkımda</a></li>
@@ -409,14 +424,12 @@
         <h2>Deneyim</h2>
         <div class="deneyim-container">
             
-            <!-- ESSEN AVM -->
             <div class="deneyim-box">
                 <div class="deneyim-tarih">Haziran 2025 - Ekim 2025</div>
                 <h3 class="deneyim-baslik">Bilgi İşlem Personeli - Essen AVM</h3>
                 <p class="deneyim-detay">
                     33 şubede yer alan <strong>100+ cihazlık altyapının</strong> (POS, kasa, el terminali, yazıcı, switch/router) kesintisiz çalışmasını 2-3 kişilik dinamik bir ekiple sağladım. Ticket sistemi üzerinden gelen arızaları <strong>Remote Desktop</strong> veya günlük saha müdahalesiyle yerinde tespit ederek hızlıca çözüm ürettim. 
                 </p>
-                <p></p>
                 <p class="deneyim-detay">
                     Ağ kopukluklarında duruma göre <strong>switch/router reset</strong>, port/kablo müdahalesi veya üst birime eskalasyon uygulayarak servis sürekliliğini ve iş akışını korudum.
                 </p>
@@ -426,7 +439,6 @@
                 <p class="deneyim-detay" style="margin-top: 8px;"><strong>Teknolojiler:</strong> Windows Server, Ağ Yönetimi (Switch/Router), POS &amp; El Terminali, Uzak Masaüstü</p>
             </div>
 
-            <!-- DVU DANISMANLIK -->
             <div class="deneyim-box">
                 <div class="deneyim-tarih">Şubat 2025 - Haziran 2025</div>
                 <h3 class="deneyim-baslik">Yazılım Stajyeri - DVU Danışmanlık</h3>
@@ -462,7 +474,6 @@
         <h2>Projeler - Çalışmalar</h2>
         <div class="grid-container">
             
-            <!-- 1. KART: TEZ (İSTATİSTİK İKONLU) -->
             <div class="card">
                 <div class="card-icon-wrapper">
                     <i class="fas fa-chart-pie"></i>
@@ -474,7 +485,6 @@
                 </div>
             </div>
             
-            <!-- 2. KART: ROLE ASSIGNMENT (ŞİFRE/KİLİT İKONLU) -->
             <div class="card">
                 <div class="card-icon-wrapper">
                     <i class="fas fa-user-shield"></i>
@@ -486,7 +496,6 @@
                 </div>
             </div>
             
-            <!-- 3. KART: SERVER APPS (SUNUCU/SERVER İKONLU) -->
             <div class="card">
                 <div class="card-icon-wrapper">
                     <i class="fas fa-server"></i>
@@ -498,7 +507,6 @@
                 </div>
             </div>
             
-            <!-- 4. KART: SMA (AKIŞ ŞEMASI/PROJE İKONLU) -->
             <div class="card">
                 <div class="card-icon-wrapper">
                     <i class="fas fa-sitemap"></i>
@@ -527,7 +535,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="gorsel/data-excel.jpg" alt="SAP Sertifikası" onclick="acLightbox(this.src)">
+                <img src="gorsel/data-excel.jpg" alt="Excel Veri Analizi" onclick="acLightbox(this.src)">
                 <div class="card-content">
                     <h3>Excel ile Veri Analizi</h3>
                     <span style="display: block; color: var(--turkuaz); font-weight: bold; margin-bottom: 15px; font-size: 0.9rem;">DATACAMP</span>
@@ -535,7 +543,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="gorsel/time-series-excel.jpg" alt="SAP Sertifikası" onclick="acLightbox(this.src)">
+                <img src="gorsel/time-series-excel.jpg" alt="Excel Zaman Serileri" onclick="acLightbox(this.src)">
                 <div class="card-content">
                     <h3>Excel ile Zaman Serileri Analizi</h3>
                     <span style="display: block; color: var(--turkuaz); font-weight: bold; margin-bottom: 15px; font-size: 0.9rem;">DATACAMP</span>
@@ -543,7 +551,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="gorsel/introduction-excel.jpg" alt="SAP Sertifikası" onclick="acLightbox(this.src)">
+                <img src="gorsel/introduction-excel.jpg" alt="İleri Düzey Excel" onclick="acLightbox(this.src)">
                 <div class="card-content">
                     <h3>İleri Düzey Excel'e Giriş</h3>
                     <span style="display: block; color: var(--turkuaz); font-weight: bold; margin-bottom: 15px; font-size: 0.9rem;">DATACAMP</span>
@@ -575,7 +583,6 @@
             document.getElementById("navLinks").classList.toggle("active");
         }
 
-        // Mobilde linklere tıklandığında menünün otomatik kapanmasını sağlar
         document.querySelectorAll('#navLinks a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('active');
